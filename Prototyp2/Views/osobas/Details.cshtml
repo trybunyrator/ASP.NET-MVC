@@ -1,0 +1,82 @@
+﻿@model Prototyp2.Views.osoba
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>osoba</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwisko_rodowe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwisko_rodowe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_zgonu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_zgonu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_urodzenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_urodzenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grob.koordynaty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grob.koordynaty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kaplan.imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kaplan.imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.osoba_typ.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.osoba_typ.nazwa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Wróc do listy", "Index")
+</p>

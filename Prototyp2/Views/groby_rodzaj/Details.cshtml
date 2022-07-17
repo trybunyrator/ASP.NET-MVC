@@ -1,0 +1,36 @@
+﻿@model Prototyp2.Views.groby_rodzaj
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>groby_rodzaj</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ilosc_miejsc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ilosc_miejsc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*
+        @Html.ActionLink("Edytuj", "Edit", new { id = Model.id }) |
+    *@
+    @Html.ActionLink("Wróc do listy", "Index")
+</p>

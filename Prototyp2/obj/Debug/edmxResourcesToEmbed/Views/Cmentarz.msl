@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CmentarzModelStoreContainer" CdmEntityContainer="CmentarzEntities">
+    <EntitySetMapping Name="grob">
+      <EntityTypeMapping TypeName="CmentarzModel.grob">
+        <MappingFragment StoreEntitySet="grob">
+          <ScalarProperty Name="id_grob" ColumnName="id_grob" />
+          <ScalarProperty Name="groby_rodzaj_id" ColumnName="groby_rodzaj_id" />
+          <ScalarProperty Name="koordynaty" ColumnName="koordynaty" />
+          <ScalarProperty Name="miejscowosc_id" ColumnName="miejscowosc_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="groby_rodzaj">
+      <EntityTypeMapping TypeName="CmentarzModel.groby_rodzaj">
+        <MappingFragment StoreEntitySet="groby_rodzaj">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+          <ScalarProperty Name="ilosc_miejsc" ColumnName="ilosc_miejsc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="kaplan">
+      <EntityTypeMapping TypeName="CmentarzModel.kaplan">
+        <MappingFragment StoreEntitySet="kaplan">
+          <ScalarProperty Name="id_kaplan" ColumnName="id_kaplan" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="miejscowosc">
+      <EntityTypeMapping TypeName="CmentarzModel.miejscowosc">
+        <MappingFragment StoreEntitySet="miejscowosc">
+          <ScalarProperty Name="id_miejscowosci" ColumnName="id_miejscowosci" />
+          <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="osoba">
+      <EntityTypeMapping TypeName="CmentarzModel.osoba">
+        <MappingFragment StoreEntitySet="osoba">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+          <ScalarProperty Name="nazwisko_rodowe" ColumnName="nazwisko_rodowe" />
+          <ScalarProperty Name="data_zgonu" ColumnName="data_zgonu" />
+          <ScalarProperty Name="data_urodzenia" ColumnName="data_urodzenia" />
+          <ScalarProperty Name="grob_id" ColumnName="grob_id" />
+          <ScalarProperty Name="osoba_typ_id" ColumnName="osoba_typ_id" />
+          <ScalarProperty Name="kaplan_id" ColumnName="kaplan_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="osoba_typ">
+      <EntityTypeMapping TypeName="CmentarzModel.osoba_typ">
+        <MappingFragment StoreEntitySet="osoba_typ">
+          <ScalarProperty Name="id_typ" ColumnName="id_typ" />
+          <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

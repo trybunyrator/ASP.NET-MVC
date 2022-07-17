@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bfdfc891835a4428a9ced29e84bb0b52" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="CmentarzModel.grob" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CmentarzModel.groby_rodzaj" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CmentarzModel.kaplan" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CmentarzModel.miejscowosc" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CmentarzModel.osoba" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CmentarzModel.osoba_typ" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="CmentarzModel.FK_grob_Togroby_rodzaj" ManuallyRouted="false" />
+        <AssociationConnector Association="CmentarzModel.FK_grob_Tomiejscowosc" ManuallyRouted="false" />
+        <AssociationConnector Association="CmentarzModel.FK_osoba_Togrob" ManuallyRouted="false" />
+        <AssociationConnector Association="CmentarzModel.FK_osoba_Tokaplan" ManuallyRouted="false" />
+        <AssociationConnector Association="CmentarzModel.FK_osoba_Toosoba_typ" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

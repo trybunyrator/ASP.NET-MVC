@@ -1,0 +1,28 @@
+﻿@model Prototyp2.Views.miejscowosc
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>miejscowosc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id_miejscowosci }) |
+    *@
+    @Html.ActionLink("Wróc do listy", "Index")
+</p>

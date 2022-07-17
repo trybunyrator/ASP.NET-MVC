@@ -1,0 +1,42 @@
+﻿@model Prototyp2.Views.grob
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>grob</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.koordynaty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.koordynaty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.groby_rodzaj.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.groby_rodzaj.nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.miejscowosc.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.miejscowosc.nazwa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.id_grob }) |
+    @Html.ActionLink("Wróc do listy", "Index")
+</p>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Prototyp2.Views.osoba_typ>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Dodaj nowy", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nazwa)
+        </td>
+        <td>
+            @Html.ActionLink("Edytuj", "Edit", new { id=item.id_typ }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.id_typ }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.id_typ })
+        </td>
+    </tr>
+}
+
+</table>

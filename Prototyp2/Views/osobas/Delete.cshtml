@@ -1,0 +1,88 @@
+﻿@model Prototyp2.Views.osoba
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Jesteś pewien że chcesz usunąć ten rekord?</h3>
+<div>
+    <h4>osoba</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nazwisko_rodowe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nazwisko_rodowe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_zgonu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_zgonu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_urodzenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_urodzenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grob.koordynaty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grob.koordynaty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kaplan.imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kaplan.imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.osoba_typ.nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.osoba_typ.nazwa)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Wróc do listy", "Index")
+        </div>
+    }
+</div>

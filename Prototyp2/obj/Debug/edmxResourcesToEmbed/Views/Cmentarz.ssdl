@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CmentarzModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="grob">
+    <Key>
+      <PropertyRef Name="id_grob" />
+    </Key>
+    <Property Name="id_grob" Type="int" Nullable="false" />
+    <Property Name="groby_rodzaj_id" Type="int" Nullable="false" />
+    <Property Name="koordynaty" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="miejscowosc_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="groby_rodzaj">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ilosc_miejsc" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="kaplan">
+    <Key>
+      <PropertyRef Name="id_kaplan" />
+    </Key>
+    <Property Name="id_kaplan" Type="int" Nullable="false" />
+    <Property Name="imie" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="nazwisko" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="miejscowosc">
+    <Key>
+      <PropertyRef Name="id_miejscowosci" />
+    </Key>
+    <Property Name="id_miejscowosci" Type="int" Nullable="false" />
+    <Property Name="nazwa" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="osoba">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nazwisko_rodowe" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="data_zgonu" Type="date" Nullable="false" />
+    <Property Name="data_urodzenia" Type="date" Nullable="false" />
+    <Property Name="grob_id" Type="int" Nullable="false" />
+    <Property Name="osoba_typ_id" Type="int" />
+    <Property Name="kaplan_id" Type="int" />
+  </EntityType>
+  <EntityType Name="osoba_typ">
+    <Key>
+      <PropertyRef Name="id_typ" />
+    </Key>
+    <Property Name="id_typ" Type="int" Nullable="false" />
+    <Property Name="nazwa" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_grob_Togroby_rodzaj">
+    <End Role="groby_rodzaj" Type="Self.groby_rodzaj" Multiplicity="1" />
+    <End Role="grob" Type="Self.grob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="groby_rodzaj">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="grob">
+        <PropertyRef Name="groby_rodzaj_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_grob_Tomiejscowosc">
+    <End Role="miejscowosc" Type="Self.miejscowosc" Multiplicity="1" />
+    <End Role="grob" Type="Self.grob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="miejscowosc">
+        <PropertyRef Name="id_miejscowosci" />
+      </Principal>
+      <Dependent Role="grob">
+        <PropertyRef Name="miejscowosc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_osoba_Togrob">
+    <End Role="grob" Type="Self.grob" Multiplicity="1" />
+    <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grob">
+        <PropertyRef Name="id_grob" />
+      </Principal>
+      <Dependent Role="osoba">
+        <PropertyRef Name="grob_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_osoba_Tokaplan">
+    <End Role="kaplan" Type="Self.kaplan" Multiplicity="0..1" />
+    <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kaplan">
+        <PropertyRef Name="id_kaplan" />
+      </Principal>
+      <Dependent Role="osoba">
+        <PropertyRef Name="kaplan_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_osoba_Toosoba_typ">
+    <End Role="osoba_typ" Type="Self.osoba_typ" Multiplicity="0..1" />
+    <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="osoba_typ">
+        <PropertyRef Name="id_typ" />
+      </Principal>
+      <Dependent Role="osoba">
+        <PropertyRef Name="osoba_typ_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CmentarzModelStoreContainer">
+    <EntitySet Name="grob" EntityType="Self.grob" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="groby_rodzaj" EntityType="Self.groby_rodzaj" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kaplan" EntityType="Self.kaplan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="miejscowosc" EntityType="Self.miejscowosc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="osoba" EntityType="Self.osoba" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="osoba_typ" EntityType="Self.osoba_typ" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_grob_Togroby_rodzaj" Association="Self.FK_grob_Togroby_rodzaj">
+      <End Role="groby_rodzaj" EntitySet="groby_rodzaj" />
+      <End Role="grob" EntitySet="grob" />
+    </AssociationSet>
+    <AssociationSet Name="FK_grob_Tomiejscowosc" Association="Self.FK_grob_Tomiejscowosc">
+      <End Role="miejscowosc" EntitySet="miejscowosc" />
+      <End Role="grob" EntitySet="grob" />
+    </AssociationSet>
+    <AssociationSet Name="FK_osoba_Togrob" Association="Self.FK_osoba_Togrob">
+      <End Role="grob" EntitySet="grob" />
+      <End Role="osoba" EntitySet="osoba" />
+    </AssociationSet>
+    <AssociationSet Name="FK_osoba_Tokaplan" Association="Self.FK_osoba_Tokaplan">
+      <End Role="kaplan" EntitySet="kaplan" />
+      <End Role="osoba" EntitySet="osoba" />
+    </AssociationSet>
+    <AssociationSet Name="FK_osoba_Toosoba_typ" Association="Self.FK_osoba_Toosoba_typ">
+      <End Role="osoba_typ" EntitySet="osoba_typ" />
+      <End Role="osoba" EntitySet="osoba" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

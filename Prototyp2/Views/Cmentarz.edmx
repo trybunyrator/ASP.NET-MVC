@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CmentarzModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="grob">
+          <Key>
+            <PropertyRef Name="id_grob" />
+          </Key>
+          <Property Name="id_grob" Type="int" Nullable="false" />
+          <Property Name="groby_rodzaj_id" Type="int" Nullable="false" />
+          <Property Name="koordynaty" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="miejscowosc_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="groby_rodzaj">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ilosc_miejsc" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kaplan">
+          <Key>
+            <PropertyRef Name="id_kaplan" />
+          </Key>
+          <Property Name="id_kaplan" Type="int" Nullable="false" />
+          <Property Name="imie" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nazwisko" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="miejscowosc">
+          <Key>
+            <PropertyRef Name="id_miejscowosci" />
+          </Key>
+          <Property Name="id_miejscowosci" Type="int" Nullable="false" />
+          <Property Name="nazwa" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="osoba">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwisko_rodowe" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="data_zgonu" Type="date" Nullable="false" />
+          <Property Name="data_urodzenia" Type="date" Nullable="false" />
+          <Property Name="grob_id" Type="int" Nullable="false" />
+          <Property Name="osoba_typ_id" Type="int" />
+          <Property Name="kaplan_id" Type="int" />
+        </EntityType>
+        <EntityType Name="osoba_typ">
+          <Key>
+            <PropertyRef Name="id_typ" />
+          </Key>
+          <Property Name="id_typ" Type="int" Nullable="false" />
+          <Property Name="nazwa" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_grob_Togroby_rodzaj">
+          <End Role="groby_rodzaj" Type="Self.groby_rodzaj" Multiplicity="1" />
+          <End Role="grob" Type="Self.grob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groby_rodzaj">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grob">
+              <PropertyRef Name="groby_rodzaj_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grob_Tomiejscowosc">
+          <End Role="miejscowosc" Type="Self.miejscowosc" Multiplicity="1" />
+          <End Role="grob" Type="Self.grob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="miejscowosc">
+              <PropertyRef Name="id_miejscowosci" />
+            </Principal>
+            <Dependent Role="grob">
+              <PropertyRef Name="miejscowosc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_osoba_Togrob">
+          <End Role="grob" Type="Self.grob" Multiplicity="1" />
+          <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grob">
+              <PropertyRef Name="id_grob" />
+            </Principal>
+            <Dependent Role="osoba">
+              <PropertyRef Name="grob_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_osoba_Tokaplan">
+          <End Role="kaplan" Type="Self.kaplan" Multiplicity="0..1" />
+          <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kaplan">
+              <PropertyRef Name="id_kaplan" />
+            </Principal>
+            <Dependent Role="osoba">
+              <PropertyRef Name="kaplan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_osoba_Toosoba_typ">
+          <End Role="osoba_typ" Type="Self.osoba_typ" Multiplicity="0..1" />
+          <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="osoba_typ">
+              <PropertyRef Name="id_typ" />
+            </Principal>
+            <Dependent Role="osoba">
+              <PropertyRef Name="osoba_typ_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CmentarzModelStoreContainer">
+          <EntitySet Name="grob" EntityType="Self.grob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groby_rodzaj" EntityType="Self.groby_rodzaj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kaplan" EntityType="Self.kaplan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="miejscowosc" EntityType="Self.miejscowosc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="osoba" EntityType="Self.osoba" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="osoba_typ" EntityType="Self.osoba_typ" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_grob_Togroby_rodzaj" Association="Self.FK_grob_Togroby_rodzaj">
+            <End Role="groby_rodzaj" EntitySet="groby_rodzaj" />
+            <End Role="grob" EntitySet="grob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grob_Tomiejscowosc" Association="Self.FK_grob_Tomiejscowosc">
+            <End Role="miejscowosc" EntitySet="miejscowosc" />
+            <End Role="grob" EntitySet="grob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_osoba_Togrob" Association="Self.FK_osoba_Togrob">
+            <End Role="grob" EntitySet="grob" />
+            <End Role="osoba" EntitySet="osoba" />
+          </AssociationSet>
+          <AssociationSet Name="FK_osoba_Tokaplan" Association="Self.FK_osoba_Tokaplan">
+            <End Role="kaplan" EntitySet="kaplan" />
+            <End Role="osoba" EntitySet="osoba" />
+          </AssociationSet>
+          <AssociationSet Name="FK_osoba_Toosoba_typ" Association="Self.FK_osoba_Toosoba_typ">
+            <End Role="osoba_typ" EntitySet="osoba_typ" />
+            <End Role="osoba" EntitySet="osoba" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CmentarzModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="grob">
+          <Key>
+            <PropertyRef Name="id_grob" />
+          </Key>
+          <Property Name="id_grob" Type="Int32" Nullable="false" />
+          <Property Name="groby_rodzaj_id" Type="Int32" Nullable="false" />
+          <Property Name="koordynaty" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="miejscowosc_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="groby_rodzaj" Relationship="Self.FK_grob_Togroby_rodzaj" FromRole="grob" ToRole="groby_rodzaj" />
+          <NavigationProperty Name="miejscowosc" Relationship="Self.FK_grob_Tomiejscowosc" FromRole="grob" ToRole="miejscowosc" />
+          <NavigationProperty Name="osoba" Relationship="Self.FK_osoba_Togrob" FromRole="grob" ToRole="osoba" />
+        </EntityType>
+        <EntityType Name="groby_rodzaj">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ilosc_miejsc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="grob" Relationship="Self.FK_grob_Togroby_rodzaj" FromRole="groby_rodzaj" ToRole="grob" />
+        </EntityType>
+        <EntityType Name="kaplan">
+          <Key>
+            <PropertyRef Name="id_kaplan" />
+          </Key>
+          <Property Name="id_kaplan" Type="Int32" Nullable="false" />
+          <Property Name="imie" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="osoba" Relationship="Self.FK_osoba_Tokaplan" FromRole="kaplan" ToRole="osoba" />
+        </EntityType>
+        <EntityType Name="miejscowosc">
+          <Key>
+            <PropertyRef Name="id_miejscowosci" />
+          </Key>
+          <Property Name="id_miejscowosci" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="grob" Relationship="Self.FK_grob_Tomiejscowosc" FromRole="miejscowosc" ToRole="grob" />
+        </EntityType>
+        <EntityType Name="osoba">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko_rodowe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data_zgonu" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="data_urodzenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="grob_id" Type="Int32" Nullable="false" />
+          <Property Name="osoba_typ_id" Type="Int32" />
+          <Property Name="kaplan_id" Type="Int32" />
+          <NavigationProperty Name="grob" Relationship="Self.FK_osoba_Togrob" FromRole="osoba" ToRole="grob" />
+          <NavigationProperty Name="kaplan" Relationship="Self.FK_osoba_Tokaplan" FromRole="osoba" ToRole="kaplan" />
+          <NavigationProperty Name="osoba_typ" Relationship="Self.FK_osoba_Toosoba_typ" FromRole="osoba" ToRole="osoba_typ" />
+        </EntityType>
+        <EntityType Name="osoba_typ">
+          <Key>
+            <PropertyRef Name="id_typ" />
+          </Key>
+          <Property Name="id_typ" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="osoba" Relationship="Self.FK_osoba_Toosoba_typ" FromRole="osoba_typ" ToRole="osoba" />
+        </EntityType>
+        <Association Name="FK_grob_Togroby_rodzaj">
+          <End Role="groby_rodzaj" Type="Self.groby_rodzaj" Multiplicity="1" />
+          <End Role="grob" Type="Self.grob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groby_rodzaj">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="grob">
+              <PropertyRef Name="groby_rodzaj_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_grob_Tomiejscowosc">
+          <End Role="miejscowosc" Type="Self.miejscowosc" Multiplicity="1" />
+          <End Role="grob" Type="Self.grob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="miejscowosc">
+              <PropertyRef Name="id_miejscowosci" />
+            </Principal>
+            <Dependent Role="grob">
+              <PropertyRef Name="miejscowosc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_osoba_Togrob">
+          <End Role="grob" Type="Self.grob" Multiplicity="1" />
+          <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grob">
+              <PropertyRef Name="id_grob" />
+            </Principal>
+            <Dependent Role="osoba">
+              <PropertyRef Name="grob_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_osoba_Tokaplan">
+          <End Role="kaplan" Type="Self.kaplan" Multiplicity="0..1" />
+          <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kaplan">
+              <PropertyRef Name="id_kaplan" />
+            </Principal>
+            <Dependent Role="osoba">
+              <PropertyRef Name="kaplan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_osoba_Toosoba_typ">
+          <End Role="osoba_typ" Type="Self.osoba_typ" Multiplicity="0..1" />
+          <End Role="osoba" Type="Self.osoba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="osoba_typ">
+              <PropertyRef Name="id_typ" />
+            </Principal>
+            <Dependent Role="osoba">
+              <PropertyRef Name="osoba_typ_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CmentarzEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="grob" EntityType="Self.grob" />
+          <EntitySet Name="groby_rodzaj" EntityType="Self.groby_rodzaj" />
+          <EntitySet Name="kaplan" EntityType="Self.kaplan" />
+          <EntitySet Name="miejscowosc" EntityType="Self.miejscowosc" />
+          <EntitySet Name="osoba" EntityType="Self.osoba" />
+          <EntitySet Name="osoba_typ" EntityType="Self.osoba_typ" />
+          <AssociationSet Name="FK_grob_Togroby_rodzaj" Association="Self.FK_grob_Togroby_rodzaj">
+            <End Role="groby_rodzaj" EntitySet="groby_rodzaj" />
+            <End Role="grob" EntitySet="grob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_grob_Tomiejscowosc" Association="Self.FK_grob_Tomiejscowosc">
+            <End Role="miejscowosc" EntitySet="miejscowosc" />
+            <End Role="grob" EntitySet="grob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_osoba_Togrob" Association="Self.FK_osoba_Togrob">
+            <End Role="grob" EntitySet="grob" />
+            <End Role="osoba" EntitySet="osoba" />
+          </AssociationSet>
+          <AssociationSet Name="FK_osoba_Tokaplan" Association="Self.FK_osoba_Tokaplan">
+            <End Role="kaplan" EntitySet="kaplan" />
+            <End Role="osoba" EntitySet="osoba" />
+          </AssociationSet>
+          <AssociationSet Name="FK_osoba_Toosoba_typ" Association="Self.FK_osoba_Toosoba_typ">
+            <End Role="osoba_typ" EntitySet="osoba_typ" />
+            <End Role="osoba" EntitySet="osoba" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CmentarzModelStoreContainer" CdmEntityContainer="CmentarzEntities">
+          <EntitySetMapping Name="grob">
+            <EntityTypeMapping TypeName="CmentarzModel.grob">
+              <MappingFragment StoreEntitySet="grob">
+                <ScalarProperty Name="id_grob" ColumnName="id_grob" />
+                <ScalarProperty Name="groby_rodzaj_id" ColumnName="groby_rodzaj_id" />
+                <ScalarProperty Name="koordynaty" ColumnName="koordynaty" />
+                <ScalarProperty Name="miejscowosc_id" ColumnName="miejscowosc_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groby_rodzaj">
+            <EntityTypeMapping TypeName="CmentarzModel.groby_rodzaj">
+              <MappingFragment StoreEntitySet="groby_rodzaj">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="ilosc_miejsc" ColumnName="ilosc_miejsc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kaplan">
+            <EntityTypeMapping TypeName="CmentarzModel.kaplan">
+              <MappingFragment StoreEntitySet="kaplan">
+                <ScalarProperty Name="id_kaplan" ColumnName="id_kaplan" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="miejscowosc">
+            <EntityTypeMapping TypeName="CmentarzModel.miejscowosc">
+              <MappingFragment StoreEntitySet="miejscowosc">
+                <ScalarProperty Name="id_miejscowosci" ColumnName="id_miejscowosci" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="osoba">
+            <EntityTypeMapping TypeName="CmentarzModel.osoba">
+              <MappingFragment StoreEntitySet="osoba">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="nazwisko_rodowe" ColumnName="nazwisko_rodowe" />
+                <ScalarProperty Name="data_zgonu" ColumnName="data_zgonu" />
+                <ScalarProperty Name="data_urodzenia" ColumnName="data_urodzenia" />
+                <ScalarProperty Name="grob_id" ColumnName="grob_id" />
+                <ScalarProperty Name="osoba_typ_id" ColumnName="osoba_typ_id" />
+                <ScalarProperty Name="kaplan_id" ColumnName="kaplan_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="osoba_typ">
+            <EntityTypeMapping TypeName="CmentarzModel.osoba_typ">
+              <MappingFragment StoreEntitySet="osoba_typ">
+                <ScalarProperty Name="id_typ" ColumnName="id_typ" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
